@@ -2,337 +2,198 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>A tiny surprise ♡</title>
 <style>
-  * {
-    box-sizing: border-box;
+*{
+  box-sizing:border-box;
+}
+body{
+  margin:0;
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:linear-gradient(135deg,#fff7f7,#fdf1f6);
+  font-family:Georgia,"Times New Roman",serif;
+  color:#5c4650;
+  overflow-x:hidden;
+}
+.wrap{
+  width:min(92vw,430px);
+  text-align:center;
+  padding:28px;
+}
+.card{
+  background:rgba(255,255,255,.86);
+  border:1px solid rgba(190,140,160,.22);
+  border-radius:28px;
+  padding:38px 26px;
+  box-shadow:0 18px 50px rgba(100,60,80,.12);
+}
+.tiny{
+  font:600 11px/1.2 Arial,sans-serif;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  opacity:.55;
+}
+.flower{
+  font-size:58px;
+  margin:14px 0;
+  animation:float 3s ease-in-out infinite;
+}
+h1{
+  font-size:28px;
+  font-weight:400;
+  line-height:1.3;
+  margin:14px 0 8px;
+}
+.note{
+  font-size:14px;
+  line-height:1.6;
+  opacity:.68;
+}
+button{
+  margin-top:20px;
+  border:0;
+  border-radius:999px;
+  padding:13px 22px;
+  background:#7c5868;
+  color:white;
+  font-size:14px;
+  cursor:pointer;
+}
+button:active{
+  transform:scale(.98);
+}
+/* SURPRISE */
+#secret{
+  display:none;
+  margin-top:24px;
+  animation:appear .8s ease forwards;
+}
+/* PHOTO */
+.photo{
+  width:100%;
+  border-radius:20px;
+  overflow:hidden;
+  box-shadow:0 10px 30px rgba(100,60,80,.15);
+}
+.photo img{
+  width:100%;
+  height:auto;
+  display:block;
+}
+/* MESSAGE UNDER PHOTO */
+.message{
+  font-size:17px;
+  line-height:1.6;
+  margin-top:18px;
+}
+/* SMALL MESSAGE */
+.small-message{
+  font-size:12px;
+  line-height:1.6;
+  opacity:.65;
+  margin-top:20px;
+}
+/* HEARTS */
+.heart{
+  position:fixed;
+  pointer-events:none;
+  animation:rise 4s linear forwards;
+  opacity:.7;
+}
+/* ANIMATIONS */
+@keyframes float{
+  50%{
+    transform:translateY(-7px);
   }
-  html, body {
-    margin: 0;
-    width: 100%;
-    min-height: 100%;
+}
+@keyframes rise{
+  from{
+    transform:translateY(0) scale(.8);
+    opacity:.8;
   }
-  body {
-    min-height: 100vh;
-    min-height: 100dvh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background:
-      radial-gradient(circle at top, #fffafb 0%, transparent 45%),
-      linear-gradient(135deg, #fff7f7, #fdf1f6);
-    font-family: Georgia, "Times New Roman", serif;
-    color: #5c4650;
-    overflow-x: hidden;
-    overflow-y: auto;
+  to{
+    transform:translateY(-105vh) scale(1.3);
+    opacity:0;
   }
-  .wrap {
-    width: min(92vw, 430px);
-    padding: 28px 0;
-    text-align: center;
+}
+@keyframes appear{
+  from{
+    opacity:0;
+    transform:translateY(12px);
   }
-  .card {
-    background: rgba(255, 255, 255, 0.88);
-    border: 1px solid rgba(190, 140, 160, 0.22);
-    border-radius: 28px;
-    padding: 34px 24px;
-    box-shadow:
-      0 18px 50px rgba(100, 60, 80, 0.12);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+  to{
+    opacity:1;
+    transform:translateY(0);
   }
-  .tiny {
-    font-family: Arial, sans-serif;
-    font-size: 11px;
-    font-weight: 600;
-    line-height: 1.2;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    opacity: 0.55;
-  }
-  .flower {
-    font-size: 58px;
-    margin: 14px 0;
-    animation: float 3s ease-in-out infinite;
-  }
-  h1 {
-    font-size: 28px;
-    line-height: 1.3;
-    font-weight: 400;
-    margin: 12px 0 8px;
-  }
-  .intro {
-    font-size: 16px;
-    line-height: 1.6;
-    margin: 8px 0;
-  }
-  .note {
-    font-size: 13px;
-    line-height: 1.6;
-    opacity: 0.65;
-    margin: 10px 0;
-  }
-  /* BUTTON */
-  button {
-    display: inline-block;
-    margin-top: 20px;
-    border: none;
-    border-radius: 999px;
-    padding: 14px 23px;
-    background: #7c5868;
-    color: white;
-    font-family: Arial, sans-serif;
-    font-size: 14px;
-    cursor: pointer;
-    -webkit-tap-highlight-color: transparent;
-    transition:
-      transform 0.2s ease,
-      box-shadow 0.2s ease;
-  }
-  button:hover {
-    box-shadow: 0 7px 20px rgba(100, 60, 80, 0.18);
-  }
-  button:active {
-    transform: scale(0.97);
-  }
-  /* HIDDEN SURPRISE */
-  #secret {
-    display: none;
-    margin-top: 24px;
-    animation: appear 0.8s ease forwards;
-  }
-  /* PHOTO */
-  .photo-wrapper {
-    width: 100%;
-    border-radius: 20px;
-    overflow: hidden;
-    background: #f8eef2;
-    box-shadow:
-      0 10px 30px rgba(100, 60, 80, 0.15);
-  }
-  #preview {
-    display: none;
-    width: 100%;
-    height: auto;
-    max-height: 520px;
-    object-fit: cover;
-    vertical-align: middle;
-  }
-  /* PHOTO PICKER */
-  .choose-photo {
-    display: inline-block;
-    margin-top: 16px;
-    padding: 11px 18px;
-    border-radius: 999px;
-    background: transparent;
-    border: 1px solid rgba(124, 88, 104, 0.35);
-    color: #7c5868;
-    font-family: Arial, sans-serif;
-    font-size: 13px;
-    cursor: pointer;
-  }
-  .choose-photo:active {
-    transform: scale(0.97);
-  }
-  #photoInput {
-    display: none;
-  }
-  /* MESSAGE UNDER PHOTO */
-  .message {
-    margin-top: 18px;
-    font-size: 17px;
-    line-height: 1.65;
-    opacity: 0;
-    animation: messageAppear 1s ease 0.3s forwards;
-  }
-  /* SMALL MESSAGE AT THE BOTTOM */
-  .small-message {
-    margin-top: 22px;
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: 12px;
-    line-height: 1.65;
-    opacity: 0;
-    animation: messageAppear 1s ease 0.8s forwards;
-  }
-  /* HEARTS */
-  .heart {
-    position: fixed;
-    left: 0;
-    bottom: -30px;
-    pointer-events: none;
-    z-index: 10;
-    animation:
-      rise 4.5s linear forwards;
-  }
-  /* ANIMATIONS */
-  @keyframes float {
-    0%, 100% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-7px);
-    }
-  }
-  @keyframes rise {
-    0% {
-      transform:
-        translateY(0)
-        scale(0.8)
-        rotate(0deg);
-      opacity: 0;
-    }
-    15% {
-      opacity: 0.75;
-    }
-    100% {
-      transform:
-        translateY(-110vh)
-        scale(1.3)
-        rotate(20deg);
-      opacity: 0;
-    }
-  }
-  @keyframes appear {
-    from {
-      opacity: 0;
-      transform: translateY(15px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  @keyframes messageAppear {
-    from {
-      opacity: 0;
-      transform: translateY(8px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
+}
 </style>
 </head>
 <body>
 <main class="wrap">
-  <section class="card">
-    <!-- INTRO -->
-    <div class="tiny">
-      a tiny surprise ♡
+<section class="card">
+  <div class="tiny">
+    a tiny surprise ♡
+  </div>
+  <div class="flower">
+    🌷
+  </div>
+  <h1>
+    A little something for you...
+  </h1>
+  <p class="note">
+    I made this just for you ♡
+  </p>
+  <button id="btn" type="button">
+    open your tiny surprise
+  </button>
+  <!-- SURPRISE -->
+  <div id="secret">
+    <!-- YOUR PHOTO -->
+    <div class="photo">
+      <img src="foto.jpeg" alt="A little surprise">
     </div>
-    <div class="flower">
-      🌷
+    <!-- MESSAGE UNDER PHOTO -->
+    <div class="message">
+      The flower isn’t blooming yet...<br>
+      but I hope you’ll like it anyway ♡
     </div>
-    <h1>
-      A little something for you...
-    </h1>
-    <p class="intro">
-      I made this just for you ♡
-    </p>
-    <p class="note">
-      Something small, but hopefully enough to make you smile.
-    </p>
-    <!-- OPEN BUTTON -->
-    <button id="openButton" type="button">
-      open your tiny surprise
-    </button>
-    <!-- SURPRISE -->
-    <div id="secret">
-      <!-- PHOTO -->
-      <div class="photo-wrapper">
-        <img
-          id="preview"
-          alt="Your surprise photo"
-        >
-      </div>
-      <!-- CHOOSE PHOTO BUTTON -->
-      <label
-        class="choose-photo"
-        for="photoInput"
-      >
-        choose a photo 📷
-      </label>
-      <input
-        id="photoInput"
-        type="file"
-        accept="image/*"
-      >
-      <!-- MESSAGE UNDER PHOTO -->
-      <div class="message">
-        The flower isn’t blooming yet...<br>
-        but I hope you’ll like it anyway ♡
-      </div>
-      <!-- SMALL MESSAGE -->
-      <div class="small-message">
-        You can be mad at me again later 🤭<br>
-        but for now… just smile for me, okay? ♡
-      </div>
+    <!-- SMALL MESSAGE AT THE BOTTOM -->
+    <div class="small-message">
+      You can be mad at me again later 🤭<br>
+      but for now… just smile for me, okay? ♡
     </div>
-  </section>
+  </div>
+</section>
 </main>
 <script>
-  /* GET ELEMENTS */
-  const openButton =
-    document.getElementById("openButton");
-  const secret =
-    document.getElementById("secret");
-  const photoInput =
-    document.getElementById("photoInput");
-  const preview =
-    document.getElementById("preview");
-  /* OPEN SURPRISE */
-  openButton.addEventListener("click", function () {
-    secret.style.display = "block";
-    openButton.style.display = "none";
-    createHearts();
-  });
-  /* CHOOSE PHOTO */
-  photoInput.addEventListener("change", function (event) {
-    const file = event.target.files[0];
-    if (!file) {
-      return;
-    }
-    /*
-      Make sure the selected file is an image.
-    */
-    if (!file.type.startsWith("image/")) {
-      alert("Please choose an image.");
-      return;
-    }
-    /*
-      Read the photo directly from the device.
-      The photo is NOT uploaded anywhere.
-    */
-    const reader = new FileReader();
-    reader.onload = function (e) {
-      preview.src = e.target.result;
-      preview.style.display = "block";
-    };
-    reader.readAsDataURL(file);
-    createHearts();
-  });
-  /* HEART ANIMATION */
-  function createHearts() {
-    for (let i = 0; i < 16; i++) {
-      const heart =
-        document.createElement("span");
-      heart.className = "heart";
-      heart.textContent =
-        Math.random() > 0.5 ? "♡" : "✦";
-      heart.style.left =
-        (10 + Math.random() * 80) + "vw";
-      heart.style.fontSize =
-        (12 + Math.random() * 18) + "px";
-      heart.style.animationDelay =
-        (Math.random() * 0.8) + "s";
-      document.body.appendChild(heart);
-      setTimeout(function () {
-        heart.remove();
-      }, 5000);
-    }
+const btn = document.getElementById("btn");
+const secret = document.getElementById("secret");
+btn.addEventListener("click", function(){
+  secret.style.display = "block";
+  btn.style.display = "none";
+  /* floating hearts */
+  for(let i = 0; i < 16; i++){
+    const h = document.createElement("span");
+    h.className = "heart";
+    h.textContent =
+      Math.random() > .5 ? "♡" : "✦";
+    h.style.left =
+      (10 + Math.random() * 80) + "vw";
+    h.style.bottom = "-20px";
+    h.style.fontSize =
+      (12 + Math.random() * 18) + "px";
+    h.style.animationDelay =
+      (Math.random() * .8) + "s";
+    document.body.appendChild(h);
+    setTimeout(function(){
+      h.remove();
+    },4500);
   }
+});
 </script>
 </body>
 </html>
